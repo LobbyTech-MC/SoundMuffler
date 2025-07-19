@@ -31,13 +31,13 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
         ) {
             Location loc;
             if (event.getPacketType() == PacketType.Play.Server.NAMED_SOUND_EFFECT) {
-                int x = event.getPacket().getIntegers().read(0) >> 3;
-                int y = event.getPacket().getIntegers().read(1) >> 3;
-                int z = event.getPacket().getIntegers().read(2) >> 3;
+                int x = event.getPacket().getIntegers().readSafely(0) >> 3;
+                int y = event.getPacket().getIntegers().readSafely(1) >> 3;
+                int z = event.getPacket().getIntegers().readSafely(2) >> 3;
                 loc = new Location(event.getPlayer().getWorld(), x, y, z);
             } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND) {
                 loc = event.getPlayer().getWorld().getEntities().stream()
-                    .filter(e -> e.getEntityId() == event.getPacket().getIntegers().read(1))
+                    .filter(e -> e.getEntityId() == event.getPacket().getIntegers().readSafely(1))
                     .map(Entity::getLocation)
                     .findAny().orElse(null);
             } else return;
