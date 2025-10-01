@@ -30,14 +30,17 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
             || event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND
         ) {
             Location loc;
-            if (event.getPacketType() == PacketType.Play.Server.NAMED_SOUND_EFFECT) {
-                int x = event.getPacket().getIntegers().readSafely(0) >> 3;
-                int y = event.getPacket().getIntegers().readSafely(1) >> 3;
-                int z = event.getPacket().getIntegers().readSafely(2) >> 3;
+            Integer a = event.getPacket().getIntegers().readSafely(0);
+            Integer b = event.getPacket().getIntegers().readSafely(1);
+            Integer c = event.getPacket().getIntegers().readSafely(2);
+            if (a != null && b != null && c != null && event.getPacketType() == PacketType.Play.Server.NAMED_SOUND_EFFECT) {
+                int x = a >> 3;
+                int y = b >> 3;
+                int z = c >> 3;
                 loc = new Location(event.getPlayer().getWorld(), x, y, z);
-            } else if (event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND) {
+            } else if (b != null && event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND) {
                 loc = event.getPlayer().getWorld().getEntities().stream()
-                    .filter(e -> e.getEntityId() == event.getPacket().getIntegers().readSafely(1))
+                    .filter(e -> e.getEntityId() == b)
                     .map(Entity::getLocation)
                     .findAny().orElse(null);
             } else return;
