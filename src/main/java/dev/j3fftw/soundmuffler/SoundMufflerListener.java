@@ -32,6 +32,9 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
             || event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND
         ) {
             Location loc;
+            if (event.getPacket().getIntegers().getFields().size() < 3) {
+            	return;
+            }
             Integer a = event.getPacket().getIntegers().readSafely(0);
             Integer b = event.getPacket().getIntegers().readSafely(1);
             Integer c = event.getPacket().getIntegers().readSafely(2);
