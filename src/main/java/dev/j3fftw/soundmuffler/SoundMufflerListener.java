@@ -15,9 +15,12 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import javax.annotation.Nonnull;
 
+@EnableAsync
 public class SoundMufflerListener extends PacketAdapter implements Listener, EnergyNetComponent {
 
     public SoundMufflerListener(Plugin plugin) {
@@ -27,6 +30,7 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
     }
 
     @Override
+    @Async
     public void onPacketSending(PacketEvent event) {
         if (event.getPacketType() == PacketType.Play.Server.NAMED_SOUND_EFFECT
             || event.getPacketType() == PacketType.Play.Server.ENTITY_SOUND
@@ -69,6 +73,7 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
         }
     }
 
+    @Async
     private Block findSoundMuffler(Location loc) {
         final int dis = SoundMufflerMachine.DISTANCE;
         for (int x = loc.getBlockX() - dis; x < loc.getBlockX() + dis; x++) {
@@ -89,23 +94,27 @@ public class SoundMufflerListener extends PacketAdapter implements Listener, Ene
         return null;
     }
 
+    @Async
     public void start() {
         ProtocolLibrary.getProtocolManager().addPacketListener(this);
     }
 
     @Nonnull
     @Override
+    @Async
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
     @Override
+    @Async
     public int getCapacity() {
         return 352;
     }
 
     @Nonnull
     @Override
+    @Async
     public String getId() {
         return "SOUND_MUFFLER";
     }
