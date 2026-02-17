@@ -29,7 +29,7 @@ public class SoundMuffler extends JavaPlugin implements SlimefunAddon {
         }
 
         SOUND_MUFFLER = new ItemGroup(new NamespacedKey(this, "sound_muffler"),
-            new CustomItemStack(Material.BEACON, "&7降噪音器", "", "&a> 点击打开"));
+            new CustomItemStack(Material.BEACON, "&7消音器", "", "&a> 单击打开"));
 
         new SoundMufflerListener(this).start();
 
@@ -37,7 +37,7 @@ public class SoundMuffler extends JavaPlugin implements SlimefunAddon {
         soundMufflerMachine.register(this);
 
         new Research(new NamespacedKey(this, "sound_muffler"),
-            6912, "降噪音器", 11)
+            6912, "消音器", 11)
             .addItems(soundMufflerMachine.getItem())
             .register();
     }

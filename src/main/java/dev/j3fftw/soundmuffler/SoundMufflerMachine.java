@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class SoundMufflerMachine extends SlimefunItem implements EnergyNetComponent {
 
-    private static final String ITEM_NAME = "&3降噪音器";
+    private static final String ITEM_NAME = "&3消音器";
     private static final String ITEM_ID = "SOUND_MUFFLER";
 
     public static final int DISTANCE = 8;
@@ -76,7 +76,7 @@ public class SoundMufflerMachine extends SlimefunItem implements EnergyNetCompon
                     "&7可用值: 0-100",
                     "&7左键: -10",
                     "&7右键: +10",
-                    "&7shift+左/右键: -/+1"));
+                    "&7蹲下左/右键: -/+1"));
 
                 final int finalVolume = volume;
                 menu.addMenuClickHandler(0, (p, arg1, arg2, arg3) -> {

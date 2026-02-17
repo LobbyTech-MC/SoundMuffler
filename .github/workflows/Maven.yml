@@ -1,0 +1,30 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.3.3
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1.4.3
+      with:
+        java-version: 1.8
+    - name: Build with Maven
+      run: mvn package --file pom.xml
+    - name: Archive artifacts (artifacts)
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+        name: SoundMuffler zh-CN
+        path: target/SoundMuffler.jar
+# 注意要和打包出来的一致
